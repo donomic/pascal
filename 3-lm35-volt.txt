@@ -1,0 +1,26 @@
+const int sensorPin = A0;
+float sensorValue;
+float voltageOut;
+float temperatureC;
+float temperatureF;
+// uncomment if using LM335
+//float temperatureK;
+void setup() {
+pinMode(sensorPin, INPUT);
+Serial.begin(9600);
+}
+void loop() {
+sensorValue = analogRead(sensorPin);
+voltageOut = (sensorValue * 5000) / 1024;
+
+// calculate temperature for LM35 (LM35DZ)
+temperatureC = voltageOut / 10;
+temperatureF = (temperatureC * 1.8) + 32;
+Serial.print("Temperature(oC): ");
+Serial.print(temperatureC);
+Serial.print(" Temperature(oF): ");
+Serial.print(temperatureF);
+Serial.print(" Voltage(mV): ");
+Serial.println(voltageOut);
+delay(1000);
+}
